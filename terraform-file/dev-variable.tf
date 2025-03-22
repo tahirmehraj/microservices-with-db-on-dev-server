@@ -9,4 +9,7 @@ variable "dev-server-ports" {
   type = list(number)
   description = "dev-server-sec-gr-inbound-rules"
 }
-variable "devservertag" {}
+variable "devservertags" {
+  description = "Tags for the development server"
+  type        = map(string)
+}

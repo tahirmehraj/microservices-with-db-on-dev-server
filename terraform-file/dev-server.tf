@@ -21,16 +21,12 @@ resource "aws_instance" "PetclinicServer" {
     id = aws_launch_template.PetclinicServerLT.id
     version = aws_launch_template.PetclinicServerLT.latest_version
   }
-  tags = {
-    Name = var.devservertag
-  }
+  tags = var.devservertags
 }
 
 resource "aws_security_group" "dev-server-sg" {
   name = var.devops_server_secgr
-  tags = {
-    Name = var.devops_server_secgr
-  }
+  tags = var.devservertags
   dynamic "ingress" {
     for_each = var.dev-server-ports
     iterator = port
@@ -38,7 +34,7 @@ resource "aws_security_group" "dev-server-sg" {
       from_port = port.value
       to_port = port.value
       protocol = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = ["104.30.161.176/32"]
     }
   }
 
